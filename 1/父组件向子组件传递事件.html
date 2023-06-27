@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue/axios.min.js"></script>
+    <script src="../vue/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{msg}}{{count}}</h1>
+        <login @aa="testParent" @testHehe="testHehe"></login>
+    </div>
+    <script>
+        const login = {
+            template:
+                `<div>
+                <h3>用户登录</h3><button @click="testChild">点我</button>
+            </div>`,
+
+            data() {
+                return {
+                    count: 0
+                }
+            },
+
+            methods: {
+                testChild() {
+                    alert('我是子组件中定义的事件');
+                    this.$emit('aa')
+                    this.$emit('testhehe', this.count)
+                },
+
+            }
+        }
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '组件之间事件传递',
+                count: 1
+            },
+            components: {
+                login
+            },
+
+            methods: {
+                testParent() {
+                    alert('我是父组件中定义的事件')
+                },
+
+
+                testHehe(name) {
+                    console.log('我是父组件中的hehe');
+                    console.log(name)
+                    this.count = name
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

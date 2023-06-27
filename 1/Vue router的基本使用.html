@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue/vue.js"></script>
+    <script src="../vue/axios.min.js"></script>
+    <script src="../vue/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}<br>
+        <a href="#/login">用户登录</a>
+        <a href="#/reg">用户注册</a>
+        <!-- 显示路由组件标签 -->
+        <router-view></router-view>
+    </div>
+
+    <script>
+        const login = {
+            template: `<div><h1>用户登录</h1></div>`
+        };
+
+        const reg = {
+            template: `<div><h1>用户注册</h1></div>`
+        };
+
+        const notFound = {
+            template: `<div><h1>404 Not Found!当前页面走丢了</h1></div>`
+        }
+
+        const router = new VueRouter({
+            routes: [//配置路由规则
+
+                { path: '/', redirect: '/login' },// 访问根路径时，重定向到登录页面
+                { path: '/login', component: login },
+                { path: '/reg', component: reg },
+                { path: '*', component: notFound }//通配，当用户在地址栏输入的网址不是以上这些的时候报404
+            ]
+        });
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'router的基本使用'
+            },
+            methods: {
+
+            },
+            components: {
+                login,
+                reg
+            },
+            //根据es6语法，这里相当于router:router
+            router
+        })
+    </script>
+</body>
+
+</html>

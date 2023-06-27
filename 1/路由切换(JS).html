@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue/vue.js"></script>
+    <script src="../vue/axios.min.js"></script>
+    <script src="../vue/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="login">用户登录</button>
+        <button @click="register">用户注册</button>
+        <router-view></router-view>
+    </div>
+
+    <script>
+        const login = {
+            template: `<div><h1>用户登录</h1></div>`
+        };
+
+        const reg = {
+            template: `<div><h1>用户注册</h1></div>`
+        };
+
+        const router = new VueRouter({
+            routes: [//配置路由规则
+                //name:这个属性代表路由对象名称，用来给路由对象唯一名称标识
+                { path: '/login', component: login, name: 'Login' },
+                { path: '/reg', component: reg, name: 'Reg' },
+            ]
+        });
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+                login() {
+                    //....这里是业务操作的代码
+                    //先执行一些业务操作的代码,如发送axios请求完成登录，在响应回来之后切换路由到主页 
+
+
+
+                    //在vue router中多次切换同一个路由存在问题
+                    // 解决方法有两种，第一种是每次切换路由之前手动判断；第二种是引入官方的一段配置文件(百度)
+
+                    //this.$route代表当前路由对象 this.$router 代表路由管理器对象
+                    if (this.$route.name != 'Login') {
+                        //以下三种写法都可以实现跳转
+                        // this.$router.push('/login')
+                        // this.$router.push({ path: '/login' })
+                        this.$router.push({ name: 'Login' })
+                    }
+
+
+                },
+                register() {
+                    if (this.$route.name != 'Reg') {
+                        this.$router.push({ name: 'Reg' })
+                    }
+
+                }
+            },
+            components: {
+
+            },
+            router
+        })
+    </script>
+
+</body>
+
+</html>

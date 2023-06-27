@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../vue/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>{{user}}</h1>
+
+        <h1>{{user.id}}</h1>
+        <h1>{{school[0]}}</h1>
+        <h1 v-text="msg">6666</h1>
+        <h1 v-html="msg">6666</h1>
+        <h1>{{msg}}66666</h1>
+        姓: <input type="text" v-model="firstName"> <br><br>
+        名: <input type="text" v-model:value="lastName"> <br><br>
+        姓名: <span>{{fullName()}}</span>
+        <h1>年龄:{{age}}</h1>
+        <button v-on:click="add(1)">点我加年龄</button>
+        <button @click="add(1)">点我加年龄</button>
+        <h2 v-show="flag">你好</h2>
+    </div>
+
+    <script type="text/javascript">
+
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: '#root',
+
+            data: {
+                flag: true,
+                age: 1,
+                user: { id: 21, name: "xiaohong", age: 23 },
+                school: ["河南校区", "北京校区"],
+                firstName: "张",
+                lastName: '三',
+                msg: "hello vue"
+            },
+
+            methods: {
+                fullName() {
+                    return this.firstName + '-' + this.lastName
+                },
+                add(a) {
+                    this.age += a
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

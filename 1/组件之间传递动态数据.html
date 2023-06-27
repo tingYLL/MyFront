@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue/vue.js"></script>
+    <script src="../vue/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <login :name="name" :count="count"></login>
+        <input type="text" v-model="name">
+    </div>
+
+
+    <script>
+        const login = {
+            template:
+                `<div>
+                <h3>用户登录{{this.name}}</h3>
+                <h3>{{aaacount}}</h3>
+                <button @click="test">点我count</button>
+            </div>`,
+
+            props: ['name', 'count'],
+
+            data() {
+                return {
+                    aaacount: this.count
+                }
+            },
+
+            methods: {
+                test() {
+                    this.aaacount++;
+                }
+            }
+        }
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                name: '我是vue实例管理数据',
+                count: 10
+            },
+
+            components: {
+                login
+            }
+        })
+    </script>
+</body>
+
+</html>

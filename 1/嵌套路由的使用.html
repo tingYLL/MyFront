@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue/vue.js"></script>
+    <script src="../vue/axios.min.js"></script>
+    <script src="../vue/vue-router.js"></script>
+</head>
+
+<body>
+    <template id="users">
+        <div>
+            <h3>用户列表</h3>
+            <!-- <a href="#/users/useradd">添加用户信息</a>    ↓ 或者用下面的方法也一样 -->
+            <router-link :to="{name:'useradd'}"></router-link>
+            <table border="1">
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>age</th>
+                    <th>salary</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="user,index in users">
+                    <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.age}}</td>
+                    <td>{{user.salary}}</td>
+                    <td><a href="">删除</a>&nbsp<router-link :to="{name:'useredit',query:{id:user.id}}">修改</router-link>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- 展示子路由组件标签 -->
+            <router-view></router-view>
+        </div>
+    </template>
+
+
+
+
+    <div id="app">
+        <h1>{{msg}}</h1>
+
+        <router-link :to="{name:'users'}">用户列表</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script>
+        const users = {
+            template: '#users',
+            data() {
+                return {
+                    users: []
+                }
+            },
+            created() {
+                //发送axios请求查询所有,这里先用写死的数据
+                this.users = [
+                    { id: 1, name: 'xiaochen', age: 19, salary: 3000 },
+                    { id: 2, name: 'xiaohei', age: 19, salary: 2300 },
+                    { id: 3, name: 'xiaodong', age: 19, salary: 4000 }
+                ]
+            }
+        };
+
+        //定义用户添加组件
+        const useradd = {
+            template: `<div><form action="">姓名<input type="text" ><br>年龄<input type="text"><br>工资<input type="text"><br><input type="submit" value="提交"></form></div>`
+        }
+
+        //定义用户修改组件
+        const useredit = {
+            template: `<div><form action="">id&nbsp&nbsp&nbsp<input type="text" v-model:value="user.id"><br>姓名<input type="text" v-model:value='user.name'><br>年龄<input type="text" v-model:value="user.age"><br>工资<input type="text" v-model:value="user.salary"><br><input type="submit" value="提交" @click="editUser"></form></div>`,
+            data() {
+                return {
+                    user: {}
+                }
+            },
+            created() {
+                let id = this.$route.query.id
+
+                //正常的写法应该是这样的，把参数传给后端，得到的数据通过v-model绑定到前端页面
+
+                // axios.get("url?id="+id).then(res=>{
+                //     this.user = res.data
+                // }).catch(err=>{
+
+                // })
+
+                //这里就用写死的数据
+                this.user = { id: id, name: 'xiaochen', age: 19, salary: 3000 }
+            },
+
+            methods: {
+                editUser() {
+                    //发送axios请求更新用户
+                    // axios.post("url", this.user).then(res => {
+                    //     this.user = {}//清空数据, 切换路由（都修改完了当然要把修改的表单隐藏起来了）
+                    //     this.$route.push({ name: 'users' })
+                    // })
+                    //这里没有对应的后台，所以直接切换
+                    this.$router.push({ name: 'users' })
+                }
+            }
+        }
+
+        const router = new VueRouter({
+            routes: [
+                {
+                    path: '/users', name: 'users', component: users,
+                    children: [//嵌套子组件路由，注意：嵌套路由中子路由不能使用/开头   访问子路由 /users/useradd
+                        { path: 'useradd', name: 'useradd', component: useradd },
+                        { path: 'useredit', name: 'useredit', component: useredit }
+                    ]
+                }
+            ]
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "vue router 基本使用之嵌套路由"
+            },
+            methods: {
+
+            },
+            router
+        })
+    </script>
+</body>
+
+</html>

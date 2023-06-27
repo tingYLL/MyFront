@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue/axios.min.js"></script>
+    <script src="../vue/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+    </div>
+
+    let=`<div>
+        <h1>小黑</h1>
+        <button onclick="test()">点我</button>
+    </div>`
+</body>
+<script>
+    let id = 21;
+    let name = '小三'
+    let age = 23
+
+    const emp = { id, name, age }
+    console.log(emp)
+
+    function test() {
+        for (let i = 0; i < 10; i++) {
+            console.log(i);
+        }
+
+
+    }
+
+    test()
+    var app = new Vue({
+        el: '#app',
+        data: {
+            msg: 'ES6基本语法'
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../vue/axios.min.js"></script>
+    <script>
+
+        var instance = axios.create({
+            baseURL: "http://localhost:8080",
+            timeout: 5000
+        })
+
+        //请求拦截器
+        instance.interceptors.request.use(function (config) {
+            // console.log(config)
+            if (config.url.indexOf("?") == -1) {
+                config.url += "?token=1234"
+            } else {
+                config.url += "&token=1234"
+            }
+
+            return config
+        })
+
+        //响应拦截器
+        instance.interceptors.response.use(function (response) {
+            console.log("进入响应拦截器", response)
+            return response
+        })
+
+        instance.get('/test?id=1&name=xiaoz').then(function (response) {
+            console.log(response)
+        }).catch(function (error) {
+            console.log(error)
+        })
+
+        instance.post('/test1', { id: 2, name: 'lilei' }).then(function (response) {
+            console.log(response)
+        }).catch(function (error) {
+            console.log(error)
+        })
+
+    </script>
+</body>
+
+</html>

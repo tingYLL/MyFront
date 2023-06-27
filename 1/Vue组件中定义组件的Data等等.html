@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue/vue.js"></script>
+    <script src="../vue/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <!-- 登录  -->
+        <login></login>
+
+        <!-- 注册 -->
+        <register></register>
+
+    </div>
+
+    <script>
+        Vue.component('register', {
+            template: `<div><h3>我是注册</h3><span>{{msg}}</span></div>`,
+            data() {
+                return {
+                    msg: '我是注册全局组件中的数据'
+                }
+
+            }
+        })
+
+        const login = {
+            template: `<div>
+            <h2>用户登录</h2>
+            <h2>{{counter}}-----{{counterSqrt}}</h2>
+            <button @click="test(10)">点我counter++</button>
+            <aa></aa>
+            <register></register>
+            </div>`,
+            data() {
+                return {
+                    counter: 0,
+
+                }
+            },
+
+            methods: {
+                test(count) {
+                    this.counter += count;
+                }
+            },
+
+            computed: {
+                counterSqrt() {
+                    return this.counter * this.counter;
+                }
+            },
+
+            //可以在组件里面再进行嵌套子组件
+            components: {
+                aa: { template: '<div><span>我是aa子组件</span></div>' }
+            }
+        }
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "Vue的组件中定义组件Data methods Computed等"
+            },
+
+            components: {//用来定义局部组件
+                login//等价于login:login,在ES6语法规则中，因为键值对名称相同，所以可以简写
+            }
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>

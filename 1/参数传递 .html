@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue//vue.js"></script>
+    <script src="../vue/axios.min.js"></script>
+    <script src="../vue/vue-router.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <br>
+        <a href="#/login?name=xiaochen&password=123">用户登录</a>
+        <a href="#/register/21/xiaodong">用户注册</a>
+        <br>
+
+        <!-- query -->
+        <router-link to="/login?name=xiaohei&password=123456">用户登录 </router-link>
+        <router-link :to="{path:'/login',query:{name:'xiaohong',password:123456}}">用户登录 </router-link>
+        <router-link :to="{name:'Login',query:{name:'xiaosha',password:123456}}">用户登录</router-link>
+        <router-view></router-view>
+
+        <!-- restful -->
+        <router-link :to="{path:'/register/22/xiaojingdou'}">用户注册</router-link>
+        <router-link :to="{name:'Register',params:{id:233,name:'xiaojinniu'}}">用户注册</router-link>
+    </div>
+    <script>
+
+        const login = {
+            template: `<div><h4>用户登录</h4></div>`,
+            created() {
+                console.log(this.$route.query.name)//?后面所传的所有参数会被封装到query对象中
+                console.log(this.$route.query.password)
+            }
+        };
+
+        const register = {
+            template: `<div><h4>用户注册</h4></div>`,
+            created() {
+                console.log(this.$route)
+                console.log(this.$route.params.id)
+                console.log(this.$route.params.name)
+            }
+        };
+
+        const router = new VueRouter({
+            routes: [
+                { path: '/login', component: login, name: 'Login' },
+                { path: '/register/:id/:name', component: register, name: 'Register' }
+            ]
+        });
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'vue router 基本使用之参数传递'
+            },
+            methods: {
+
+            },
+            router
+        })
+    </script>
+</body>
+
+</html>

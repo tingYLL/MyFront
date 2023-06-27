@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue/vue.js"></script>
+    <script src="../vue/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <!-- 登录  -->
+        <login></login>
+
+        <!-- 注册 -->
+        <register></register>
+
+        <!-- 用户添加 -->
+        <add></add>
+
+    </div>
+    <script>
+
+        Vue.component('login', {
+            //temlate用来书写该组件的html代码
+            template: `<div><h2>用户登录</h2><form action="""></form></div>`
+        })
+
+        Vue.component('register', {
+            //temlate用来书写该组件的html代码
+            template: `<div><h2>用户注册</h2><form action="""></form></div>`
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'Vue中组件的使用'
+            },
+            components: {//注册局部组件
+                add: {//<-这是定义的组件的名称
+                    template: `<h2>用户添加</h2><form action=""></form>`
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

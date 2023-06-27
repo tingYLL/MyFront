@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../vue/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <span v-for="k,v,index in user">{{indedx}} {{k}} {{v}}</span>
+        <ul>
+            <li v-for="item,index in schools">{{index}}---{{item}}</li>
+        </ul>
+        <table border="1" width="100%">
+            <tr>
+                <td>编号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>工资</td>
+                <td>简介</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for="user,index in users" :key="user.id">
+                <td>{{user.id}}</td>
+                <td v-text="user.name"></td>
+                <td v-html="user.age"></td>
+                <td>{{user.salary}}</td>
+                <td>{{user.content}}</td>
+                <td>
+                    <a href="">删除</a>
+                    <a href="">修改</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#root',
+            data: {
+                msg: "hello vue",
+                user: { id: 21, name: "xiaochen", age: 23, salary: 230000 }, //定义一个对象
+                schools: ["河南校区", "北京校区", "天津校区"],
+                users: [{ id: 21, name: "xiaochen", age: 23, salary: 23000, content: "好人" },
+                { id: 22, name: "xiaoming", age: 23, salary: 23000, content: "好奥特曼" },
+                { id: 23, name: "xiaosan", age: 23, salary: 23000, content: "好姑娘" }]
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>
