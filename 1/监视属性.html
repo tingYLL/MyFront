@@ -51,11 +51,13 @@
 
         })
 
+
+        // 另一种写法,要写在Vue对象实例的括号之外
         vm.$watch('isHot', {
             immediate: true,
 
             // 当所监视的属性（可以是data里的属性，也可以是computed计算属性）被修改时，handler方法会被执行
-            //         旧值     新值
+            //         新值    旧值
             handler(newValue, oldValue) {
                 console.log('info被修改了', newValue, oldValue)
             }
