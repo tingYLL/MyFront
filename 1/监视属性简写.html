@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript" src="../vue/vue.js"></script>
+
+    <div id="root">
+        <!-- <h2>{{isHot?'炎热':'凉爽'}}</h2> -->
+        <h1>今天天气很{{info}}</h1>
+        <button @click="myMethod()">切换天气</button>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                isHot: true
+            },
+
+            computed: {
+                info() {
+                    return this.isHot ? '炎热' : '凉爽'
+
+                }
+            },
+            methods: {
+                myMethod() {
+                    this.isHot = !this.isHot
+                }
+            },
+            // watch: {
+            //     info: {
+            //         // 设置为true以后，一上来就会调用一下handler方法  如果不设置这个属性，handler方法只有在被监视的属性被修改时才会调用
+            //         immediate: true,
+
+            //         // 当所监视的属性（可以是data里的属性，也可以是computed计算属性）被修改时，handler方法会被执行
+            //         //         旧值     新值
+            //         handler(newValue, oldValue) {
+            //             console.log('info被修改了', newValue, oldValue)
+            //         }
+            //     }
+            // }
+
+
+
+
+            watch: {
+                info(newValue, oldValue) {
+                    console.log('info被修改了', newValue)
+                }
+            }
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>
