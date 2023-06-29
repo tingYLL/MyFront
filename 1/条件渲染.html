@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vue/vue.js"></script>
+</head>
+<body>
+
+    <div id="root">
+        <h1 v-if="false">{{name}}</h1>
+
+
+        <template v-show="0">
+            <h1>哈哈哈</h1>
+            <h1>哈哈</h1>
+            <h1>哈</h1>
+        </template>
+
+        <div v-show="true">
+            <h1>哈哈哈</h1>
+            <h1>哈哈</h1>
+            <h1>哈</h1>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el:'#root',
+            data:{
+                name:'尚硅谷'
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>
