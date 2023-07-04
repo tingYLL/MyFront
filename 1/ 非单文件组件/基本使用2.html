@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src=../../vue/vue.js type="text/javascript"></script>
+</head>
+<body>
+
+<div id="root">
+    <aa></aa>
+</div>
+
+<div id="root2">
+    <br>
+    <h2>root2</h2>
+    <aa></aa>
+</div>
+<script>
+
+
+    //创建组件
+    const student = Vue.extend({
+        template: `
+          <div><h2>学校名{{ schoolName }}</h2>
+          <h2>学生名{{ studentName }}</h2></div>
+
+
+        `,
+        data() {
+            return {
+                schoolName: '北京大学',
+                studentName: '李华'
+            }
+        }
+    })
+
+    Vue.component('aa',student)
+
+    const vm = new Vue({
+        el: '#root',
+
+        //注册组件
+        // components: {
+        //     student
+        // }
+    })
+
+    const vm1 = new Vue({
+        el:'#root2',
+        data:{},
+        // components:{
+        //
+        // }
+    })
+
+</script>
+
+
+</body>
+</html>

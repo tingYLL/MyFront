@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../vue/vue.js"></script>
+</head>
+<body>
+
+<div id="root">
+<!--<app></app>-->
+</div>
+
+<script>
+
+    const student = {
+
+        template: `
+          <div>
+          <h2>学生:{{ name }}</h2>
+          <h2>年龄:{{ age }}</h2>
+
+          </div>
+
+
+        `,
+        data() {
+            return {
+                name: '小帅',
+                age: 20
+            }
+        },
+
+    }
+
+    const school = Vue.extend({
+        template: `
+          <div>
+          <h2>学校:{{ name }}</h2>
+          <h2>地址:{{ address }}</h2>
+          <student></student>
+
+          </div>
+        `,
+        data() {
+            return {
+                name: '清华大学',
+                address: '北京'
+            }
+        },
+        components: {
+            student
+        }
+
+    })
+
+    const hello = {
+        template: `    <h2>hello~</h2>
+        `,
+        data() {
+            return {}
+        }
+    }
+
+    const app = {
+        template:`<div><school></school><hello></hello></div>`,
+        components: {
+            school,
+            hello,
+        }
+    }
+
+
+    new Vue({
+        template: `
+          <app></app>
+        `,
+        el: '#root',
+        components: {
+            app
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script type="text/javascript" src="../../vue/vue.js"></script>
+</head>
+<body>
+
+<div id="root">
+  <school></school>
+  <hr>
+  <stu></stu>
+</div>
+
+<script>
+
+
+
+  const school = Vue.extend({
+    name:'school',
+    template: `
+      <div>
+      <h2>学校:{{ name }}</h2>
+      <h2>地址:{{ address }}</h2>
+      </div>
+    `,
+    data() {
+      return {
+        name: '清华大学',
+        address: '北京'
+      }
+    }
+
+  })
+
+  const student = Vue.extend({
+
+    template: `
+          <div>
+          <h2>姓名:{{ name }}</h2>
+          <h2>年龄:{{ age }}</h2>
+          <button @click="func()">点我</button>
+          </div>
+        `,
+    data() {
+      return {
+        name: '黎明',
+        age: 22
+      }
+    },
+    methods:{
+      func(){console.log(this)}
+
+    }
+
+  })
+
+  console.log(student)
+
+  console.log(school)
+
+
+
+
+
+  const vm = new Vue({
+    el: '#root',
+    components: {
+      school,
+      stu:student
+    }
+  })
+</script>
+</body>
+</html>
