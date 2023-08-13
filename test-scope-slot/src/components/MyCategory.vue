@@ -1,7 +1,8 @@
 <template>
   <div class="category">
     <h3>{{title}}分类</h3>
-    <slot :films="films" :games="games" message="这是一条消息"></slot>
+    <slot :films="films" :games="games" message="这是一条消息" name="slot1">我是slot1，父组件没有传值的时候我会显示</slot>
+    <slot :films="films" :games="films" message="这是一条消息" name="slot2">我是slot2，父组件没有传值的时候我会显示</slot>
   </div>
 </template>
 <script>
